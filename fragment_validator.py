@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+import os
 def validate_fragment_file(fragment_parquet_path, task_parquet_path):
     # Read both parquet files
     fragment_df = pd.read_parquet(fragment_parquet_path)
@@ -47,7 +47,7 @@ def validate_fragment_file(fragment_parquet_path, task_parquet_path):
     return validation_df
 
 if __name__ == "__main__":
-    fragment_file = "fragment.parquet"
-    task_file = "task.parquet"
+    fragment_file = os.path.join('output_folder',"fragment.parquet" )
+    task_file = os.path.join('output_folder',"task.parquet" )
     
     validation_results = validate_fragment_file(fragment_file, task_file)
