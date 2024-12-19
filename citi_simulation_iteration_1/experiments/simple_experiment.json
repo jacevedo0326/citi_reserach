@@ -1,0 +1,11 @@
+{
+    "name": "simple",
+    "topologies": [{
+        "pathToFile": "topologies/datacenter_config.json"
+    }
+],
+    "workloads": [{
+        "pathToFile": "workloads/bitbrains-small",
+        "type": "ComputeWorkload"
+    }]
+}

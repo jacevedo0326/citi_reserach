@@ -47,7 +47,7 @@ def validate_fragment_file(fragment_parquet_path, task_parquet_path):
     return validation_df
 
 if __name__ == "__main__":
-    fragment_file = os.path.join('output_folder',"fragment.parquet" )
-    task_file = os.path.join('output_folder',"task.parquet" )
+    fragment_file = os.path.join('output_folder',"fragments.parquet" )
+    task_file = os.path.join('output_folder',"tasks.parquet" )
     
     validation_results = validate_fragment_file(fragment_file, task_file)

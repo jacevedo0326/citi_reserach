@@ -2,58 +2,56 @@ import pandas as pd
 import numpy as np
 import random
 import os
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 def create_fragment_file(task_parquet_path, output_parquet_path):
-    # Read the task parquet file
-    task_df = pd.read_parquet(task_parquet_path)
+    os.makedirs(os.path.dirname(output_parquet_path), exist_ok=True)
     
-    # List to store all fragments
+    task_df = pd.read_parquet(task_parquet_path)
     all_fragments = []
     
-    # For each VM in the task file
     for _, vm in task_df.iterrows():
-        # Random number of fragments between 20-50
         num_fragments = random.randint(20, 50)
+        num_zero = num_fragments // 5
+        num_nonzero = num_fragments - num_zero
         
-        # Calculate number of zero and non-zero fragments based on 1:4 ratio
-        num_zero = num_fragments // 5  # 20% of fragments
-        num_nonzero = num_fragments - num_zero  # 80% of fragments
-        
-        # Calculate target sum for non-zero CPU usage (half of VM's capacity)
         target_cpu_sum = vm['cpu_capacity'] / 2
-        
-        # Create non-zero CPU usage values that sum to target
         nonzero_cpu_values = np.random.random(num_nonzero)
         nonzero_cpu_values = (nonzero_cpu_values / np.sum(nonzero_cpu_values)) * target_cpu_sum
         
-        # Create fragments for this VM
         vm_fragments = []
         
-        # Add zero CPU fragments
         for _ in range(num_zero):
             vm_fragments.append({
-                'id': vm['id'],
+                'id': str(vm['id']),
                 'duration': random.choice([300000, 600000, 900000]),
-                'cpu_count': vm['cpu_count'],
-                'cpu_usage': 0
+                'cpu_count': int(vm['cpu_count']),  # Ensure int32
+                'cpu_usage': 0.0
             })
         
-        # Add non-zero CPU fragments
         for cpu_usage in nonzero_cpu_values:
             vm_fragments.append({
-                'id': vm['id'],
+                'id': str(vm['id']),
                 'duration': random.choice([300000, 600000, 900000]),
-                'cpu_count': vm['cpu_count'],
+                'cpu_count': int(vm['cpu_count']),  # Ensure int32
                 'cpu_usage': cpu_usage
             })
         
         all_fragments.extend(vm_fragments)
     
-    # Create dataframe from all fragments
     fragment_df = pd.DataFrame(all_fragments)
+    fragment_df['cpu_count'] = fragment_df['cpu_count'].astype(np.int32)  # Ensure int32
     
-    # Save as parquet file
-    fragment_df.to_parquet(output_parquet_path, index=False)
+    schema = pa.schema([
+        ('id', pa.string(), False),
+        ('duration', pa.int64(), False),
+        ('cpu_count', pa.int32(), False),  # Changed to int32
+        ('cpu_usage', pa.float64(), False)
+    ])
+    
+    table = pa.Table.from_pandas(fragment_df, schema=schema)
+    pq.write_table(table, output_parquet_path)
     
     print(f"Created fragment file at: {output_parquet_path}")
     print(f"Total number of fragments created: {len(fragment_df)}")
@@ -63,8 +61,7 @@ def create_fragment_file(task_parquet_path, output_parquet_path):
     return fragment_df
 
 if __name__ == "__main__":
-    # Define paths using os.path.join
-    task_file = os.path.join("output_folder", "task.parquet")
-    output_file = os.path.join("output_folder", "fragment.parquet")
+    task_file = os.path.join("citi_simulation_iteration_1", "workloads", "bitbrains-small", "tasks.parquet")
+    output_file = os.path.join("citi_simulation_iteration_1", "workloads", "bitbrains-small", "fragments.parquet")
     
     df = create_fragment_file(task_file, output_file)
