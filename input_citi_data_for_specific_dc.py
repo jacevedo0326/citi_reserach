@@ -73,7 +73,7 @@ def save_json(data, output_file):
 
 if __name__ == "__main__":
     excel_file = os.path.join("citi_data","citi_rutherford_hardware_sheet.xlsx")
-    output_file = os.path.join("output_folder","datacenter_config.json")
+    output_file = os.path.join("topologies","datacenter_config.json")
     
     cluster_data = excel_to_json(excel_file)
     save_json(cluster_data, output_file)

@@ -4,7 +4,7 @@ import random
 import os
 import pyarrow as pa
 import pyarrow.parquet as pq
-
+percentage = 0.1 #Here we change how hard the vm work the servers(percentage)
 def create_fragment_file(task_parquet_path, output_parquet_path):
     os.makedirs(os.path.dirname(output_parquet_path), exist_ok=True)
     
@@ -16,7 +16,8 @@ def create_fragment_file(task_parquet_path, output_parquet_path):
         num_zero = num_fragments // 5
         num_nonzero = num_fragments - num_zero
         
-        target_cpu_sum = vm['cpu_capacity'] / 2
+        # Changed from /2 (50%) to /3.333... (30%)
+        target_cpu_sum = vm['cpu_capacity'] * percentage
         nonzero_cpu_values = np.random.random(num_nonzero)
         nonzero_cpu_values = (nonzero_cpu_values / np.sum(nonzero_cpu_values)) * target_cpu_sum
         
@@ -61,7 +62,7 @@ def create_fragment_file(task_parquet_path, output_parquet_path):
     return fragment_df
 
 if __name__ == "__main__":
-    task_file = os.path.join("citi_simulation_iteration_1", "workloads", "bitbrains-small", "tasks.parquet")
-    output_file = os.path.join("citi_simulation_iteration_1", "workloads", "bitbrains-small", "fragments.parquet")
+    task_file = os.path.join("citi_simulation_iteration_4", "workloads", "bitbrains-small", "tasks.parquet")
+    output_file = os.path.join("citi_simulation_iteration_4", "workloads", "bitbrains-small", "fragments.parquet")
     
     df = create_fragment_file(task_file, output_file)
