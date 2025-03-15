@@ -1,0 +1,441 @@
+{
+    "clusters": [
+        {
+            "name": "NJ-RUTHERFORD DATA CENTER",
+            "hosts": [
+                {
+                    "name": "H01",
+                    "count": 2,
+                    "cpu": {
+                        "coreCount": 8,
+                        "coreSpeed": 2400
+                    },
+                    "memory": {
+                        "memorySize": 6442450944
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 85,
+                        "idlePower": 17
+                    }
+                },
+                {
+                    "name": "H05",
+                    "count": 101,
+                    "cpu": {
+                        "coreCount": 56,
+                        "coreSpeed": 3900
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 185,
+                        "idlePower": 25
+                    }
+                },
+                {
+                    "name": "H06",
+                    "count": 23,
+                    "cpu": {
+                        "coreCount": 28,
+                        "coreSpeed": 3900
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 185,
+                        "idlePower": 25
+                    }
+                },
+                {
+                    "name": "H07",
+                    "count": 18,
+                    "cpu": {
+                        "coreCount": 22,
+                        "coreSpeed": 2200
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H08",
+                    "count": 5,
+                    "cpu": {
+                        "coreCount": 28,
+                        "coreSpeed": 3900
+                    },
+                    "memory": {
+                        "memorySize": 412316860416
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 185,
+                        "idlePower": 25
+                    }
+                },
+                {
+                    "name": "H09",
+                    "count": 3,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 1649267441664
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 165,
+                        "idlePower": 30
+                    }
+                },
+                {
+                    "name": "H10",
+                    "count": 2,
+                    "cpu": {
+                        "coreCount": 28,
+                        "coreSpeed": 3900
+                    },
+                    "memory": {
+                        "memorySize": 6751001394544
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 185,
+                        "idlePower": 25
+                    }
+                },
+                {
+                    "name": "H11",
+                    "count": 1,
+                    "cpu": {
+                        "coreCount": 2,
+                        "coreSpeed": 2600
+                    },
+                    "memory": {
+                        "memorySize": 279172874240
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 65,
+                        "idlePower": 15
+                    }
+                },
+                {
+                    "name": "H12",
+                    "count": 1,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 0
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H13",
+                    "count": 1,
+                    "cpu": {
+                        "coreCount": 28,
+                        "coreSpeed": 3900
+                    },
+                    "memory": {
+                        "memorySize": 0
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H14",
+                    "count": 1,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 0
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 450,
+                        "idlePower": 100
+                    }
+                },
+                {
+                    "name": "H15",
+                    "count": 640,
+                    "cpu": {
+                        "coreCount": 36,
+                        "coreSpeed": 2400
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H16",
+                    "count": 192,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H17",
+                    "count": 55,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H18",
+                    "count": 48,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 549755813888
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H21",
+                    "count": 19,
+                    "cpu": {
+                        "coreCount": 28,
+                        "coreSpeed": 2700
+                    },
+                    "memory": {
+                        "memorySize": 1649267441664
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 205,
+                        "idlePower": 40
+                    }
+                },
+                {
+                    "name": "H22",
+                    "count": 15,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 0
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H23",
+                    "count": 15,
+                    "cpu": {
+                        "coreCount": 28,
+                        "coreSpeed": 2200
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 165,
+                        "idlePower": 40
+                    }
+                },
+                {
+                    "name": "H24",
+                    "count": 15,
+                    "cpu": {
+                        "coreCount": 4,
+                        "coreSpeed": 3200
+                    },
+                    "memory": {
+                        "memorySize": 13194139533312
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 302,
+                        "idlePower": 302
+                    }
+                },
+                {
+                    "name": "H26",
+                    "count": 6,
+                    "cpu": {
+                        "coreCount": 4,
+                        "coreSpeed": 2530
+                    },
+                    "memory": {
+                        "memorySize": 0
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 80,
+                        "idlePower": 30
+                    }
+                },
+                {
+                    "name": "H27",
+                    "count": 4,
+                    "cpu": {
+                        "coreCount": 16,
+                        "coreSpeed": 2100
+                    },
+                    "memory": {
+                        "memorySize": 2199023255552
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 280,
+                        "idlePower": 80
+                    }
+                },
+                {
+                    "name": "H28",
+                    "count": 3,
+                    "cpu": {
+                        "coreCount": 12,
+                        "coreSpeed": 2600
+                    },
+                    "memory": {
+                        "memorySize": 6597069766656
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 130,
+                        "idlePower": 40
+                    }
+                },
+                {
+                    "name": "H29",
+                    "count": 2,
+                    "cpu": {
+                        "coreCount": 14,
+                        "coreSpeed": 2600
+                    },
+                    "memory": {
+                        "memorySize": 3298534883328
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 450,
+                        "idlePower": 100
+                    }
+                },
+                {
+                    "name": "H30",
+                    "count": 2,
+                    "cpu": {
+                        "coreCount": 8,
+                        "coreSpeed": 2660
+                    },
+                    "memory": {
+                        "memorySize": 2199023255552
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 130,
+                        "idlePower": 40
+                    }
+                },
+                {
+                    "name": "H31",
+                    "count": 1,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 377957122048
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 310,
+                        "idlePower": 60
+                    }
+                },
+                {
+                    "name": "H32",
+                    "count": 8,
+                    "cpu": {
+                        "coreCount": 10,
+                        "coreSpeed": 3700
+                    },
+                    "memory": {
+                        "memorySize": 824633720832
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 450,
+                        "idlePower": 100
+                    }
+                },
+                {
+                    "name": "H33",
+                    "count": 1,
+                    "cpu": {
+                        "coreCount": 1,
+                        "coreSpeed": 400
+                    },
+                    "memory": {
+                        "memorySize": 0
+                    },
+                    "powerModel": {
+                        "modelType": "square",
+                        "maxPower": 32,
+                        "idlePower": 15
+                    }
+                }
+            ]
+        }
+    ]
+}
