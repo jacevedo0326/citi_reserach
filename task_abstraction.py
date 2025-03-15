@@ -100,20 +100,20 @@ def convert_csv_to_parquet(csv_file_path, output_parquet_path, subset_fraction=0
         'submission_time': 0,  # Empty submission_time as requested
         'duration': 2592252000,
         'cpu_count': "Amount of CPUs it has access to",  # Replace data with the string
-        'cpu_capacity': 2500.0,  # Fixed value as specified
+        'cpu_capacity': "2500.0, what we guessed as a good benchmark, this can be changed when we get more data from them",  # Updated as requested
         'mem_capacity': "Amount of memory VM has access to"  # Replace data with the string
     })
     
     task_df = task_df.sort_values('id')
     
-    # Define schema with string type for cpu_count and mem_capacity since we're using text values
+    # Define schema with string type for all text fields
     schema = pa.schema([
         ('id', pa.string(), False),
         ('submission_time', pa.int64(), False),
         ('duration', pa.int64(), False),
-        ('cpu_count', pa.string(), False),  # Changed to string type
-        ('cpu_capacity', pa.float64(), False),
-        ('mem_capacity', pa.string(), False)  # Changed to string type
+        ('cpu_count', pa.string(), False),  
+        ('cpu_capacity', pa.string(), False),  # Changed to string type
+        ('mem_capacity', pa.string(), False)  
     ])
     
     # Print statistics before saving
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     csv_file = "/home/joshua/dev/CitiReserach/python_files/citi_data/UF_VirtualMachines_expanded_102424.csv"
     
     # Use the Simulations directory structure
-    base_dir = "/home/joshua/dev/CitiReserach/python_files/Simulations"
+    base_dir = "/home/joshua/dev/CitiReserach/python_files"
     output_dir = os.path.join(base_dir, "abstracted_files")
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "tasks.parquet")
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     print(f"Will select 100% of RUTH VMs")
     
     try:
-        # Use subset_fraction=0.02 for 1/50 of RUTH VMs
+        # Use subset_fraction to process all VMs
         df = convert_csv_to_parquet(csv_file, output_file, subset_fraction=subset_fraction)
         
         if df is not None:
