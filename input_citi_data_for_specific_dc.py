@@ -31,17 +31,13 @@ def clean_number(value):
     except (ValueError, TypeError):
         return 0
 
-def csv_to_json(csv_file):
+def csv_to_json(csv_file, sheet_name="Citi Hardware"):
     try:
-        # Try reading with UTF-8 encoding first
-        df = pd.read_csv(csv_file, encoding='utf-8')
-    except UnicodeDecodeError:
-        try:
-            # If UTF-8 fails, try with Latin-1 encoding
-            df = pd.read_csv(csv_file, encoding='latin1')
-        except Exception as e:
-            # Fall back to a more lenient encoding
-            df = pd.read_csv(csv_file, encoding='cp1252')
+        # Try reading with openpyxl engine
+        df = pd.read_excel(csv_file, sheet_name=sheet_name, engine='openpyxl')
+    except Exception as e:
+        print(f"Error reading Excel file: {str(e)}")
+        return None
     
     cluster = {
         "clusters": [
@@ -60,27 +56,41 @@ def csv_to_json(csv_file):
     
     for index, row in df.iterrows():
         try:
-            if pd.notna(row['CPU Spec']) and str(row['CPU Spec']).strip().upper() == 'NO CPU':
+            # Skip rows without CPU info
+            if pd.isna(row['CPU name']):
                 continue
                 
-            is_storage = row.get('storage_server', 0) == 1
+            # Determine if it's a storage server (this logic may need adjustment based on your data)
+            is_storage = False
+            if 'storage_server' in df.columns:
+                is_storage = row.get('storage_server', 0) == 1
+            
             name_prefix = 'S' if is_storage else 'H'
             counter = storage_counter if is_storage else host_counter
             
-            # Clean power values and ensure max_power >= idle_power
-            idle_power = clean_number(row['Idle Power Consumption'])
-            max_power = clean_number(row['Max Power Consumption'])
-            max_power = max(max_power, idle_power)
+            # Get core count from the new columns
+            core_count = clean_number(row['CPU Total Cores'])
+            
+            # Get core speed from base frequency (convert GHz to MHz)
+            core_speed = int(float(row['CPU Base Frequency (in GHz)']) * 1000) if pd.notna(row['CPU Base Frequency (in GHz)']) else 0
+            
+            # Get power values from the specified columns
+            idle_power = clean_number(row.get('PkgWatt Idle', 50))
+            max_power = clean_number(row.get('PkgWatt CPUStress 100%', 100))
+            max_power = max(max_power, idle_power)  # Ensure max_power is at least as large as idle_power
+            
+            # For memory, adapt as needed
+            memory_size = convert_memory_to_bytes(row.get('Memory Spec', '8GB'))  # Default value
             
             host = {
                 "name": f"{name_prefix}{str(counter).zfill(2)}",
-                "count": int(row['count']) if pd.notna(row['count']) else 1,
+                "count": int(row.get('count', 1)) if pd.notna(row.get('count')) else 1,
                 "cpu": {
-                    "coreCount": int(row['core count']) if pd.notna(row['core count']) else 0,
-                    "coreSpeed": int(row['core speed']) if pd.notna(row['core speed']) else 0
+                    "coreCount": core_count,
+                    "coreSpeed": core_speed
                 },
                 "memory": {
-                    "memorySize": convert_memory_to_bytes(row['Memory Spec'])
+                    "memorySize": memory_size
                 },
                 "powerModel": {
                     "modelType": "square",
@@ -108,16 +118,20 @@ def save_json(data, output_file):
 
 if __name__ == "__main__":
     try:
-        # Use the absolute path to the CSV file
-        csv_file = "/home/joshua/dev/CitiReserach/python_files/citi_data/citi_rutherford_hardware_sheet.csv"
-        output_file = "/home/joshua/dev/CitiReserach/python_files/toplogies/datacenter_config.json"
+        # Use os.path.join for cross-platform compatibility
+        base_dir = os.path.join("C:", os.sep, "Users", "Joshua", "Dev", "citi_reserach")
+        csv_file = os.path.join(base_dir, "citi_data", "CSV_DT_Data.xlsx")
+        output_file = os.path.join(base_dir, "toplogies", "datacenter_config.json")
         
         if not os.path.exists(csv_file):
-            print(f"Error: CSV file not found at {csv_file}")
+            print(f"Error: Excel file not found at {csv_file}")
             exit(1)
             
         cluster_data = csv_to_json(csv_file)
-        save_json(cluster_data, output_file)
-        print(f"JSON file has been created at: {output_file}")
+        if cluster_data:
+            save_json(cluster_data, output_file)
+            print(f"JSON file has been created at: {output_file}")
+        else:
+            print("Failed to create cluster data.")
     except Exception as e:
         print(f"An error occurred: {str(e)}")

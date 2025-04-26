@@ -1,8 +1,8 @@
 citi_data/
 openDC/
-citi_simulation_iteration_1/openDCExperimentRunner
-citi_simulation_iteration_2/openDCExperimentRunner
-citi_simulation_iteration_3/openDCExperimentRunner
-citi_simulation_iteration_4/openDCExperimentRunner
-citi_simulation_iteration_5/openDCExperimentRunner
-citi_simulation_iteration_6/openDCExperimentRunner
+simulations/
+topologies/
+tasks_file/
+fragment_files/
+reports/
+templates/~$data_template.xlsx
