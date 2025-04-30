@@ -74,10 +74,9 @@ def csv_to_json(csv_file, sheet_name="Citi Hardware"):
             # Get core speed from base frequency (convert GHz to MHz)
             core_speed = int(float(row['CPU Base Frequency (in GHz)']) * 1000) if pd.notna(row['CPU Base Frequency (in GHz)']) else 0
             
-            # Get power values from the specified columns
-            idle_power = clean_number(row.get('PkgWatt Idle', 50))
-            max_power = clean_number(row.get('PkgWatt CPUStress 100%', 100))
-            max_power = max(max_power, idle_power)  # Ensure max_power is at least as large as idle_power
+            # Set idle power to 0 and get max power from CPU TDP L1
+            idle_power = 75  # Fixed to 0 as requested
+            max_power = clean_number(row.get('CPU TDP L1 (in Watts)', 100))  # Default to 100 if column not found
             
             # For memory, adapt as needed
             memory_size = convert_memory_to_bytes(row.get('Memory Spec', '8GB'))  # Default value
@@ -93,7 +92,7 @@ def csv_to_json(csv_file, sheet_name="Citi Hardware"):
                     "memorySize": memory_size
                 },
                 "powerModel": {
-                    "modelType": "square",
+                    "modelType": "linear",
                     "maxPower": max_power,
                     "idlePower": idle_power
                 }
